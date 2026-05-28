@@ -28,11 +28,10 @@ function addTodo() {
   }
   
   todos.push({ text: text, completed: false });
-  saveToLocalStorage();
+  saveToLocalStorage(); 
   showTodos();
   input.value = "";
 }
-
 function showTodos() {
   list.innerHTML = "";
   
@@ -44,9 +43,14 @@ function showTodos() {
       div.classList.add("completed");
     }
 
+    // 1. 할 일 텍스트 생성
     const span = document.createElement("span");
-    span.innerText = todos[i].text + " ";
+    span.innerText = todos[i].text;
     div.append(span);
+
+    // 2. 버튼들을 담을 그룹 생성
+    const btnGroup = document.createElement("div");
+    btnGroup.className = "btn-group";
 
     const completeBtn = document.createElement("button");
     completeBtn.innerText = "완료";
@@ -75,9 +79,13 @@ function showTodos() {
       showTodos();
     };
 
-    div.append(completeBtn);
-    div.append(editBtn);
-    div.append(deleteBtn);
+    // 버튼 그룹에 버튼 3개 집어넣기
+    btnGroup.append(completeBtn);
+    btnGroup.append(editBtn);
+    btnGroup.append(deleteBtn);
+
+    // 전체 상자(div)에 버튼 그룹 추가 (텍스트 아래로 들어감)
+    div.append(btnGroup);
 
     list.append(div);
   }
